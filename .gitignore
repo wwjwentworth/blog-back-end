@@ -1,9 +1,7 @@
-# dependencies
-**/node_modules
+/node_modules
 /dist
 /.vscode
 
-# misc
 .DS_Store
 npm-debug.log*
 yarn-error.log
