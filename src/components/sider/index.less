@@ -1,0 +1,48 @@
+.side-bar__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .avatar {
+    width: 60px;
+    height: 60px;
+    margin-top: 50px;
+    border-radius: 50%;
+    background-color: #FFF;
+  }
+
+  .add-btn {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+
+    border-radius: 50%;
+    margin-top: 200px;
+
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  .menu {
+    width: 100%;
+    margin-top: 32px;
+
+    &__item {
+      line-height: 44px;
+      height: 44px;
+      text-align: center;
+      font-size: 20px;
+
+      a {
+        color: #FFF;
+      }
+
+      &.active {
+        border-left: 5px solid #545564;
+        background-color: #364765;
+      }
+    }
+  }
+}
