@@ -1,19 +1,19 @@
+/*
+ * @Author: 吴文洁
+ * @Date: 2020-02-15 20:13:57
+ * @LastEditors: 吴文洁
+ * @LastEditTime: 2020-03-01 19:20:20
+ * @Description: 
+ */
 import React from 'react';
 import Nav from '../Nav';
 
 import './index.less';
 
-interface HeaderProps {
-  title: string,
-  subtitle: string,
-  bgImg?: string
-};
-interface HeaderState {};
-
 const defaultBgImg = 'https://image.xiaomaiketang.com/xm/MHC2pMySaK.png';
 
-class Header extends React.Component<HeaderProps, HeaderState> {
-  constructor(props: HeaderProps) {
+class Header extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {}
   }

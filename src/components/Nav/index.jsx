@@ -2,11 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './index.less'
-
-interface NavProps {};
-interface NavState {};
-
-class Nav extends React.Component<NavProps, NavState> {
+class Nav extends React.Component {
 
   render() {
     return (

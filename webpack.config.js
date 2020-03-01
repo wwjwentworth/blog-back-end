@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2019-12-09 15:55:29
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-02-15 17:44:51
+ * @LastEditTime: 2020-03-01 20:02:53
  * @Description: 
  */
 const path = require('path');
@@ -11,7 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -22,9 +22,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'awesome-typescript-loader',
-        exclude: /node_modules/
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-react',
+              '@babel/preset-env',
+            ],
+            plugins: [
+              '@babel/plugin-proposal-class-properties'
+            ]
+          }
+        }
       },
       {
         test: /\.(less|css)$/,
@@ -65,7 +76,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.json'],
+    extensions: ['.jsx', '.js', '.json'],
     alias: {
       '@': path.join(__dirname, 'src'),
     }

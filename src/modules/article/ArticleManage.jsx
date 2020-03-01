@@ -2,7 +2,6 @@ import React from 'react';
 import ReactMde from 'react-mde';
 import Showdown from 'showdown';
 import { Button, Form, Input, Upload } from 'antd';
-import { FormComponentProps, FormItemProps } from 'antd/lib/form';
 import { UploadChangeParam } from 'antd/lib/upload';
 
 import axios from '@/common/api/http-client';
@@ -11,7 +10,7 @@ import "react-mde/lib/styles/css/react-mde-all.css";
 import './ArticleManage.less';
 
 const FormItem = Form.Item;
-const formItemLayout: FormItemProps = {
+const formItemLayout = {
   labelCol: {
     sm: { span: 2 },
   },
@@ -20,10 +19,6 @@ const formItemLayout: FormItemProps = {
   }
 };
 
-
-type File = UploadChangeParam['file'];
-type FileList = UploadChangeParam['fileList'];
-
 const converter = new Showdown.Converter({
   tables: true,
   simplifiedAutoLink: true,
@@ -31,40 +26,23 @@ const converter = new Showdown.Converter({
   tasklists: true
 });
 
-interface ArticleManageProps extends FormComponentProps {};
-interface QueryProps {
-  title: string,
-  cover: string,
-  html: string,
-  tags: string[]
-}
-interface ArticleManageState {
-  value: string,
-  selectedTab: "write" | "preview",
-  query: QueryProps
-}
 
-class ArticleManage extends React.Component<ArticleManageProps, ArticleManageState> {
-  state: ArticleManageState = {
+class ArticleManage extends React.Component {
+  state = {
     value: '**Hello world!!!**',
     selectedTab: 'write',
-    query: {
-      title: '',
-      cover: '',
-      html: '',
-      tags: []
-    }
+    query: {}
   }
 
-  handleChangeValue = (value: string) => {
+  handleChangeValue = (value) => {
     this.setState({ value })
   }
 
-  handleChangeTab = (selectedTab: "write" | "preview") => {
+  handleChangeTab = (selectedTab) => {
     this.setState({ selectedTab })
   }
 
-  handleChange = (options: any) => {
+  handleChange = (options) => {
     const { file } = options;
   }
 
@@ -103,28 +81,6 @@ class ArticleManage extends React.Component<ArticleManageProps, ArticleManageSta
                     }
                   ]
                 })(<Input placeholder="请输入文章标题" />)
-              }
-            </FormItem>
-            <FormItem
-              {...formItemLayout}
-              label="文章封面"
-            >
-              {
-                getFieldDecorator('cover', {
-                  initialValue: {
-                    uid: -1,
-                    img_url: cover
-                  },
-                  valuePropName: 'fieldList'
-                })(
-                  <Upload
-                    action=''
-                    accept='image/*'
-                    onChange={this.handleChange}
-                  >
-                    +
-                  </Upload>
-                )
               }
             </FormItem>
           </Form>

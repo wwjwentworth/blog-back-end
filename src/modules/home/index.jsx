@@ -2,10 +2,7 @@ import React from 'react';
 import Header from '@/components/Header';
 
 import { BLOG_TITLE, MOTTO } from '@/domain/user-domain/constants';
-interface HomeProps {};
-interface HomeState {};
-
-class HomePage extends React.Component<HomeProps, HomeState> {
+class HomePage extends React.Component {
 
   render() {
     return (
