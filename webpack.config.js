@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2019-12-09 15:55:29
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-01 20:02:53
+ * @LastEditTime: 2020-03-03 21:08:00
  * @Description: 
  */
 const path = require('path');
@@ -11,7 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -22,23 +22,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-react',
-              '@babel/preset-env',
-            ],
-            plugins: [
-              '@babel/plugin-proposal-class-properties'
-            ]
-          }
-        }
+        test: /\.tsx?$/,
+        use: 'awesome-typescript-loader',
+        exclude: /node_modules/
       },
       {
-        test: /\.(less|css)$/,
+        test: /\.(less|css)?$/,
         use: [
           {
             loader: 'style-loader',
@@ -60,6 +49,7 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
+              javascriptEnabled: true
             }
           },
         ]
@@ -76,7 +66,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.jsx', '.js', '.json'],
+    extensions: ['.tsx', '.ts', '.js', 'jsx', '.json'],
     alias: {
       '@': path.join(__dirname, 'src'),
     }

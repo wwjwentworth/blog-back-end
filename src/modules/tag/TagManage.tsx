@@ -2,24 +2,44 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 11:27:40
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-01 20:39:07
- * @Description: 
+ * @LastEditTime: 2020-03-03 22:07:49
+ * @Description:
  */
 import React from 'react';
 import { Button, Modal, Input, message, Table, Pagination } from 'antd';
+import { PaginationConfig } from 'antd/lib/table';
+
 import axios from '@/common/api/http-client';
 import _find from '@/common/utils/_find';
 import TagService from '@/domain/tag-domain/TagService';
 
-class TagManage extends React.Component {
-  state = {
+// import { StandardQuery } from '@/domain/basic-domain/interface';
+
+export interface Tag {
+  name?: string,
+  _id?: string
+}
+
+interface TagState {
+  showTagModal: boolean,
+  totalCount: number,
+  currentTag: Tag,
+  tagList: Tag[],
+  query: StandardQuery
+}
+
+interface TagProps{} ;
+
+class TagManage extends React.Component<TagProps, TagState> {
+  state: TagState = {
     showTagModal: false,
     currentTag: {},
     tagList: [],
     query: {
       pageNo: 0,
       pageSize: 10
-    }
+    },
+    totalCount: 0
   };
 
   componentDidMount() {
@@ -27,7 +47,7 @@ class TagManage extends React.Component {
   }
 
   fetchTagList = () => {
-    TagService.getTagList(this.state.query).then((res) => {
+    TagService.getTagList(this.state.query).then((res: StandardResult) => {
       const { records, totalCount } = res;
       this.setState({
         tagList: records,
@@ -47,7 +67,7 @@ class TagManage extends React.Component {
         title: '操作',
         key: 'operate',
         dataIndex: 'operate',
-        render: (val, row) => {
+        render: (val: any, row: Tag) => {
           return (
             <div className="operate">
               <span className="edit">编辑</span>
@@ -74,7 +94,7 @@ class TagManage extends React.Component {
     });
   }
 
-  handleChangeTag = (event) => {
+  handleChangeTag = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     this.setState({
       currentTag: {
@@ -87,7 +107,7 @@ class TagManage extends React.Component {
   handleAddTag = () => {
     const { currentTag, tagList } = this.state;
     const { name } = currentTag;
-    if (_find(tagList, (item) => item.name === name)) {
+    if (_find(tagList, (item: Tag) => item.name === name)) {
       message.warn('该标签已存在！');
       return;
     };
@@ -97,13 +117,16 @@ class TagManage extends React.Component {
       this.fetchTagList();
     });
   }
-  handleChangePage = (current) => {
+  handleChange = (pagination: PaginationConfig) => {
+    const { current } = pagination;
     this.setState({
       query: {
         ...this.state.query,
         pageNo: current
       }
-    }, this.fetchTagList() )
+    }, () => {
+      this.fetchTagList();
+    })
   }
 
   render() {
@@ -123,21 +146,17 @@ class TagManage extends React.Component {
             rowKey={row => row._id}
             columns={this.getColumns()}
             dataSource={tagList}
-            pagination={false}
+            pagination={{
+              pageSize,
+              current: pageNo,
+              total: totalCount
+            }}
+            onChange={this.handleChange}
           />
         </div>
-        <div className="page-footer">
-          <Pagination
-            current={pageNo}
-            size={pageSize}
-            total={totalCount}
-            onChange={this.handleChangePage}
-          />
-        </div>
-
         <Modal
           visible={showTagModal}
-          title={`${currentTag.id ? '编辑' : '添加'}标签`}
+          title={`${currentTag._id ? '编辑' : '添加'}标签`}
           okText="确定"
           cancelText="取消"
           onOk={this.handleAddTag}

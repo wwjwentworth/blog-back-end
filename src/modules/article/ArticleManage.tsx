@@ -2,9 +2,13 @@ import React from 'react';
 import ReactMde from 'react-mde';
 import Showdown from 'showdown';
 import { Button, Form, Input, Upload, Select, message } from 'antd';
+import { SelectProps } from 'antd/lib/select';
+import { FormComponentProps } from 'antd/lib/form';
 
 import axios from '@/common/api/http-client';
 import TagService from '@/domain/tag-domain/TagService';
+
+import { Tag } from '../tag/TagManage';
 
 import "react-mde/lib/styles/css/react-mde-all.css";
 import './ArticleManage.less';
@@ -28,18 +32,30 @@ const converter = new Showdown.Converter({
   tasklists: true
 });
 
+interface ArticleManageState {
+  value: string,
+  selectedTab: 'write' | 'preview',
+  query: StandardQuery,
+  cover?: string,
+  title?: string,
+  tagList: Tag[],
+  selectedTagList: Tag[],
+  totalCount: number
+}
 
-class ArticleManage extends React.Component {
-  state = {
+interface ArticleManageProps extends SelectProps, FormComponentProps {};
+
+class ArticleManage extends React.Component<ArticleManageProps, ArticleManageState> {
+  state: ArticleManageState = {
     value: '**Hello world!!!**',
     selectedTab: 'write',
     query: {
       pageNo: 0,
       pageSize: 10
     },
-    cover: null,
     tagList: [],
     selectedTagList: [],
+    totalCount: 0
   }
 
   componentDidMount() {
@@ -47,7 +63,7 @@ class ArticleManage extends React.Component {
   }
 
   fetchTagList = () => {
-    TagService.getTagList(this.state.query).then((res) => {
+    TagService.getTagList(this.state.query).then((res: StandardResult) => {
       const { records, totalCount } = res;
       this.setState({
         tagList: records,
@@ -55,15 +71,15 @@ class ArticleManage extends React.Component {
     });
   }
 
-  handleChangeValue = (value) => {
+  handleChangeValue = (value: string) => {
     this.setState({ value })
   }
 
-  handleChangeTab = (selectedTab) => {
+  handleChangeTab = (selectedTab: 'write' | 'preview') => {
     this.setState({ selectedTab })
   }
 
-  handleChange = (options) => {
+  handleChange = (options: any) => {
     const { file } = options;
   }
 
@@ -82,8 +98,8 @@ class ArticleManage extends React.Component {
     })
   }
 
-  handleChangeTag = (e) => {
-    console.log(e)
+  handleChangeTag = (e: Event) => {
+    //
   }
 
   render() {
@@ -127,11 +143,10 @@ class ArticleManage extends React.Component {
                     onChange={this.handleChangeTag}
                   >
                     {
-                      tagList.map((tag, index) => {
+                      tagList.map((tag: Tag, index: number) => {
                         return (
                           <Option
                             key={`option-${index}`}
-                            lable={tag.name}
                             value={tag._id}
                           >
                             {tag.name}
@@ -146,14 +161,14 @@ class ArticleManage extends React.Component {
           </Form>
 
           <ReactMde
-          value={value}
-          onChange={this.handleChangeValue}
-          selectedTab={selectedTab}
-          onTabChange={this.handleChangeTab}
-          generateMarkdownPreview={markdown =>
-            Promise.resolve(converter.makeHtml(markdown))
-          }
-        />
+            value={value}
+            onChange={this.handleChangeValue}
+            selectedTab={selectedTab}
+            onTabChange={this.handleChangeTab}
+            generateMarkdownPreview={markdown =>
+              Promise.resolve(converter.makeHtml(markdown))
+            }
+          />
         </div>
 
         <div className="page-footer">

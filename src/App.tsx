@@ -2,8 +2,8 @@
  * @Author: 吴文洁
  * @Date: 2020-02-16 18:26:23
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-01 22:09:46
- * @Description: 
+ * @LastEditTime: 2020-03-03 21:09:11
+ * @Description:
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -21,18 +21,15 @@ import 'antd/dist/antd.less';
 import './App.less';
 
 const { Content } = Layout;
-class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
+interface AppProps {};
+interface Appstate {};
 
-  handleCollapse = (collapsed) => {
-    this.setState({ collapsed });
-  }
+class App extends React.Component<AppProps, Appstate> {
+
+  state: Appstate = {};
+
   render() {
-    const { collapsed } = this.state;
     return (
       <Layout style={{minHeight: '100vh'}}>
         <SiderBar />

@@ -2,23 +2,27 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 21:54:17
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-01 22:43:34
- * @Description: 
+ * @LastEditTime: 2020-03-03 21:02:07
+ * @Description:
  */
 
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import { Layout, Icon } from 'antd';
+
 import './index.less';
 
 const { Sider } = Layout;
 
-class SiderBar extends React.Component {
-  state = {
-    currentPathname: null
-  }
- 
-  componentWillReceiveProps(nextProps) {
+interface SiderBarState {
+  currentPathname?: string
+};
+interface SiderBarProps extends RouteComponentProps {};
+
+class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
+  state: SiderBarState = {}
+
+  componentWillReceiveProps(nextProps: SiderBarProps) {
     const { location: { pathname } } = nextProps
     this.setState({
       currentPathname: pathname
