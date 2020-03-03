@@ -2,12 +2,12 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 21:54:17
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-03 21:02:07
+ * @LastEditTime: 2020-03-03 23:03:31
  * @Description:
  */
 
 import React from 'react';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
 import { Layout, Icon } from 'antd';
 
 import './index.less';
@@ -22,11 +22,11 @@ interface SiderBarProps extends RouteComponentProps {};
 class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
   state: SiderBarState = {}
 
-  componentWillReceiveProps(nextProps: SiderBarProps) {
-    const { location: { pathname } } = nextProps
-    this.setState({
+  static getDerivedStateFromProps(nextProps: SiderBarProps) {
+    const { location: { pathname } } = nextProps;
+    return {
       currentPathname: pathname
-    })
+    }
   }
 
   render() {
@@ -40,22 +40,22 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
             <div
               className={`menu__item ${currentPathname === '/' ? 'active': '' }`}
             >
-              <Link to="/"><Icon type="appstore" /></Link>
+              <NavLink to="/"><Icon type="appstore" /></NavLink>
             </div>
             <div
               className={`menu__item ${currentPathname === '/tag' ? 'active': '' }`}
             >
-              <Link to="/tag"><Icon type="tags" /></Link>
+              <NavLink to="/tag"><Icon type="tags" /></NavLink>
             </div>
             <div
               className={`menu__item ${currentPathname === '/help' ? 'active': '' }`}
             >
-              <Link to="/help"><Icon type="question-circle" /></Link>
+              <NavLink to="/help"><Icon type="question-circle" /></NavLink>
             </div>
             <div
               className={`menu__item ${currentPathname === '/setting' ? 'active': '' }`}
             >
-              <Link to="/setting"><Icon type="setting" /></Link>
+              <NavLink to="/setting"><Icon type="setting" /></NavLink>
             </div>
           </div>
         </div>
