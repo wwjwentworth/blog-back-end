@@ -6,7 +6,7 @@ import { SelectProps } from 'antd/lib/select';
 import { FormComponentProps } from 'antd/lib/form';
 
 import axios from '@/common/api/http-client';
-import TagService from '@/domain/tag-domain/TagService';
+import TagService from '@/domains/tag-domain/TagService';
 
 import { Tag } from '../tag/TagManage';
 

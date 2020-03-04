@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 11:27:40
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-03 22:07:49
+ * @LastEditTime: 2020-03-04 21:46:01
  * @Description:
  */
 import React from 'react';
@@ -11,7 +11,7 @@ import { PaginationConfig } from 'antd/lib/table';
 
 import axios from '@/common/api/http-client';
 import _find from '@/common/utils/_find';
-import TagService from '@/domain/tag-domain/TagService';
+import TagService from '@/domains/tag-domain/TagService';
 
 // import { StandardQuery } from '@/domain/basic-domain/interface';
 
