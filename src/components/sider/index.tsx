@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 21:54:17
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-03 23:31:11
+ * @LastEditTime: 2020-03-04 13:22:21
  * @Description:
  */
 
@@ -30,6 +30,11 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
     }
   }
 
+  getExtraClass = (pathname: string) => {
+    const { currentPathname } = this.state;
+    return currentPathname.indexOf(pathname) > -1 ? 'active' : '';
+  }
+
   render() {
     const { currentPathname } = this.state;
     return (
@@ -43,17 +48,17 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
             <Link to="/"><Icon type="appstore" /></Link>
           </div>
           <div
-            className={`menu__item ${currentPathname === '/tag' ? 'active': '' }`}
+            className={`menu__item ${this.getExtraClass('tag')}`}
           >
             <Link to="/tag/manage"><Icon type="tags" /></Link>
           </div>
           <div
-            className={`menu__item ${currentPathname === '/help' ? 'active': '' }`}
+            className={`menu__item ${this.getExtraClass('help')}`}
           >
             <Link to="/help"><Icon type="question-circle" /></Link>
           </div>
           <div
-            className={`menu__item ${currentPathname === '/setting' ? 'active': '' }`}
+            className={`menu__item ${this.getExtraClass('setting')}`}
           >
             <Link to="/setting"><Icon type="setting" /></Link>
           </div>

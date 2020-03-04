@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2019-12-09 15:55:29
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-03 21:08:00
+ * @LastEditTime: 2020-03-04 13:15:55
  * @Description: 
  */
 const path = require('path');
@@ -14,11 +14,15 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    filename: 'static/js/[name].bundle.js',
+    chunkFilename: 'static/js/[name].chunk.js',
+    publicPath: '/' 
   },
   mode: 'development',
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
+  devServer: {
+    historyApiFallback: true
+  },
   module: {
     rules: [
       {
@@ -70,11 +74,6 @@ module.exports = {
     alias: {
       '@': path.join(__dirname, 'src'),
     }
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    historyApiFallback: true,
-    open: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
