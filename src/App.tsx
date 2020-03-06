@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-02-16 18:26:23
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-06 16:14:49
+ * @LastEditTime: 2020-03-06 18:56:18
  * @Description:
  */
 import React from 'react';
@@ -14,7 +14,8 @@ import { createBrowserHistory } from 'history';
 import SiderBar from '@/components/siderBar';
 
 import Article from '@/modules/article';
-import Tag from '@/modules/tag'
+import Tag from '@/modules/tag';
+import UserCenter from '@/modules/user-center';
 
 import 'antd/dist/antd.less';
 import './App.less';
@@ -37,6 +38,7 @@ class App extends React.Component<AppProps, Appstate> {
           <Switch>
             <Route exact path='/' component={Article} />
             <Route path="/tag" component={Tag} />
+            <Route path='/user-center' component={UserCenter} />
           </Switch>
         </Content>
       </Layout>

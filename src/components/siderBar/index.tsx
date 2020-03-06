@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 21:54:17
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-06 16:06:41
+ * @LastEditTime: 2020-03-06 18:55:18
  * @Description:
  */
 
@@ -39,7 +39,7 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
     const { currentPathname } = this.state;
     return (
       <div className="sider-bar">
-        <img className="avatar" />
+        <Link to="/user-center"><img className="avatar" /></Link>
         <div className="add-btn"><Icon type="plus" /></div>
         <div className="menu">
           <div
