@@ -2,16 +2,12 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 14:34:33
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-03 22:19:21
+ * @LastEditTime: 2020-03-06 17:27:35
  * @Description:
  */
 
 import { AxiosResponse } from 'axios';
 import { getTagList, addTag } from '@/data-source/tag/requestApis';
-
-interface Ass {
-  result?: any
-}
 
 interface Tag {
   name?: string,

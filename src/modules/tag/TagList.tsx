@@ -1,31 +1,30 @@
 import React from 'react';
-import { Icon } from 'antd';
 
-interface ArticleListProps {};
-interface ArticleListState {
+interface TagListProps {};
+interface TagListState {
   currentIdx: number
 };
 
-class ArticleList extends React.Component<ArticleListProps, ArticleListState> {
-  state: ArticleListState = {
+class TagList extends React.Component<TagListProps, TagListState> {
+  state: TagListState = {
     currentIdx: 0
-  }
+  };
 
-  handleChangeCurrentArticle = (currentIdx: number) => {
-    this.setState({ currentIdx })
+  handleChangeCurrentTag = (currentIdx: number) => {
+    //
   }
 
   render() {
     const { currentIdx } = this.state;
     return (
-      <div className="aside-inner article-list">
+      <div className="aside-inner tag-list">
         {
           [1, 2, 3, 4, 5, 6].map((item, idx) => {
             return (
               <div
-                key={`article${idx}`}
+                key={`tag${idx}`}
                 className={`aside-inner__item ${currentIdx === idx ? 'active' : ''}`}
-                onClick={() => this.handleChangeCurrentArticle(idx)}
+                onClick={() => this.handleChangeCurrentTag(idx)}
               >
                 <div className="item-left">
                   <span className="icon iconfont">&#xe72a;</span>
@@ -41,4 +40,4 @@ class ArticleList extends React.Component<ArticleListProps, ArticleListState> {
   }
 }
 
-export default ArticleList;
+export default TagList;

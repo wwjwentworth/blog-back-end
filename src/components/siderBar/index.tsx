@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 21:54:17
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-04 13:22:21
+ * @LastEditTime: 2020-03-06 16:06:41
  * @Description:
  */
 
@@ -50,7 +50,7 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
           <div
             className={`menu__item ${this.getExtraClass('tag')}`}
           >
-            <Link to="/tag/manage"><Icon type="tags" /></Link>
+            <Link to="/tag"><Icon type="tags" /></Link>
           </div>
           <div
             className={`menu__item ${this.getExtraClass('help')}`}
