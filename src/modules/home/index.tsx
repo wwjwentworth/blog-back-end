@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-02-15 18:00:27
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-04 21:36:48
+ * @LastEditTime: 2020-03-05 10:29:23
  * @Description:
  */
 import React from 'react';
@@ -10,8 +10,8 @@ import { Input } from 'antd';
 import SearchBar from '@/components/searchBar';
 import { BLOG_TITLE, MOTTO } from '@/domains/user-domain/constants';
 
-import ArticleList from './components/ArticleList';
-import ArticleManage from './components/ArticleManage';
+import ArticleList from '@/modules/article/ArticleList';
+import ArticleManage from '@/modules/article/ArticleManage';
 
 import './index.less';
 class HomePage extends React.Component {
