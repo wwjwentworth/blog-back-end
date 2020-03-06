@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'antd';
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
 
@@ -29,7 +30,7 @@ const mdEditorConfig = {
 class ArticleManage extends React.Component<ArticleManageProps, ArticleManageState> {
 
   state: ArticleManageState = {
-    mode: 'preview',
+    mode: 'write',
     html: '',
   }
 
@@ -93,15 +94,21 @@ class ArticleManage extends React.Component<ArticleManageProps, ArticleManageSta
         <div className="article-manage__body">
           {
             mode === 'write' ?
-            <MdEditor
-              renderHTML={this.renderHTML}
-              config={mdEditorConfig}
-              onChange={this.handleChangeEditor}
-            />:
+            <div className="write-section">
+              <MdEditor
+                renderHTML={this.renderHTML}
+                config={mdEditorConfig}
+                onChange={this.handleChangeEditor}
+              />
+              <div className="release">
+                <Button type="primary">发布</Button>
+              </div>
+            </div>
+            :
             <div
               className="preview-section"
               dangerouslySetInnerHTML={{__html: this.mdParser.render(html)}}
-            ></div>
+            />
           }
         </div>
       </div>

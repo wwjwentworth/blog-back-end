@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-02-15 18:00:27
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-05 10:29:23
+ * @LastEditTime: 2020-03-06 15:40:05
  * @Description:
  */
 import React from 'react';
@@ -24,7 +24,7 @@ class HomePage extends React.Component {
             <ArticleList />
           </SearchBar>
         </aside>
-        <section>
+        <section className="article">
           <ArticleManage />
         </section>
       </div>

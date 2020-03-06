@@ -1,4 +1,5 @@
 .article-manage {
+  height: 100%;
   &__header {
     height: 80px;
     padding: 16px;
@@ -59,6 +60,23 @@
   }
 
   &__body {
+    height: calc(100% - 80px);
     padding: 12px;
+    .write-section {
+      height: calc(100% - 60px);
+
+      .release {
+        height: 60px;
+        border: none;
+        border-top: 1px solid #e8e8e8;
+        position: fixed;
+        bottom: 0;
+        width: calc(100% - 388px);
+        line-height: 60px;
+        text-align: right;
+        margin-left: -12px;
+        padding-right: 70px;
+      }
+    }
   }
 }
