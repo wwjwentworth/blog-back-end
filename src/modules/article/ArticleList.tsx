@@ -18,13 +18,13 @@ class ArticleList extends React.Component<ArticleListProps, ArticleListState> {
   render() {
     const { currentIdx } = this.state;
     return (
-      <div className="article-list">
+      <div className="aside-list">
         {
           [1, 2, 3, 4, 5, 6].map((item, idx) => {
             return (
               <div
-                key={`article${idx}`}
-                className={`article-list__item ${currentIdx === idx ? 'active' : ''}`}
+                key={`aside${idx}`}
+                className={`aside-list__item ${currentIdx === idx ? 'active' : ''}`}
                 onClick={() => this.handleChangeCurrentArticle(idx)}
               >
                 <div className="item-left">

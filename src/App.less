@@ -3,4 +3,44 @@
     flex-direction: row;
     background-color: #F9F9F9;
   }
+
+  .page {
+    display: flex;
+
+    aside {
+      width: 300px;
+      max-width: 300px;
+  
+      .aside-list {
+        &__item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 54px;
+          padding: 0 10px 0px 30px;
+          cursor: pointer;
+  
+          &:hover, &.active {
+            background-color: #EEE;
+          }
+          
+          .item-left {
+            .text {
+              color: #333;
+            }
+            .iconfont {
+              font-size: 16px;
+              margin-right: 4px;
+              color: #223a65 ;
+            }
+          }
+  
+          .item-right {
+            color: #999;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
 }
