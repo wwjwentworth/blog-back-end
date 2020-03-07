@@ -84,7 +84,7 @@ class ArticleManage extends React.Component<ArticleManageProps, ArticleManageSta
                 <span
                   className="icon iconfont"
                   onClick={() => this.handleChangeMode('preview')}
-                >&#xe62e;</span>
+                >&#xe72a;</span>
               }
               <span className="icon iconfont">&#xe600;</span>
               <span className="icon iconfont">&#xe68b;</span>
