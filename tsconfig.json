@@ -14,7 +14,10 @@
     },
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "allowJs": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
   },
   "include": [
     "./src/**/*",

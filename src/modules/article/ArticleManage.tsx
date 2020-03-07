@@ -68,7 +68,7 @@ class ArticleManage extends React.Component<ArticleManageProps, ArticleManageSta
                       <div
                         className={`tag-item ${tag.color}`}
                         key={`tag${idx}`}
-                      >前端</div>
+                      >{tag.name}</div>
                     )
                   })
                 }

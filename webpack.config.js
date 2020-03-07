@@ -2,13 +2,16 @@
  * @Author: 吴文洁
  * @Date: 2019-12-09 15:55:29
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-04 13:15:55
+ * @LastEditTime: 2020-03-07 21:17:24
  * @Description: 
  */
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const HappyPack = require('happypack');
+
+const happyThreadPool = HappyPack.ThreadPool({ size: 4 });
 
 module.exports = {
   entry: './src/index.tsx',
@@ -26,9 +29,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'awesome-typescript-loader',
-        exclude: /node_modules/
+        test: /\.(ts|tsx)$/,
+        include: path.join(__dirname, 'src'),
+        exclude: '/node_modules',
+        use: 'happypack/loader?id=ts',
       },
       {
         test: /\.(less|css)?$/,
@@ -81,6 +85,27 @@ module.exports = {
       template: path.join(__dirname, 'dist/index.html'),
       filename: 'index.html',
       inject: 'body',
-    })
+    }),
+    new HappyPack({
+      id: 'ts',
+      threadPool: happyThreadPool,
+      loaders: [
+        {
+          loader: require.resolve('babel-loader'),
+          options: {
+            compact: true,
+            cacheDirectory: true
+          }
+        },
+        {
+          loader: require.resolve('ts-loader'),
+          options: {
+            transpileOnly: true,
+            happyPackMode: true,
+            configFile: path.join(__dirname, 'tsconfig.json')
+          },
+        }
+      ]
+    }),
   ]
 }

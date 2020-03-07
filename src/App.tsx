@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-02-16 18:26:23
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-06 18:56:18
+ * @LastEditTime: 2020-03-07 19:55:14
  * @Description:
  */
 import React from 'react';
@@ -11,7 +11,7 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import { Router, Route, Switch, withRouter, RouteComponentProps } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-import SiderBar from '@/components/siderBar';
+import SiderBar from '@/bu-components/siderBar';
 
 import Article from '@/modules/article';
 import Tag from '@/modules/tag';

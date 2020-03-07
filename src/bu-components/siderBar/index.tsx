@@ -2,25 +2,33 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 21:54:17
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-06 18:55:18
+ * @LastEditTime: 2020-03-07 21:28:04
  * @Description:
  */
 
 import React from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import { observer, inject } from 'mobx-react';
 import { Layout, Icon } from 'antd';
+import AddPosterModal from '@/bu-components/add-poster-modal';
 
 import './index.less';
 
 const { Sider } = Layout;
 
 interface SiderBarState {
-  currentPathname?: string
+  currentPathname?: string,
+  showAddPosterModal: boolean
 };
+
 interface SiderBarProps extends RouteComponentProps {};
 
+@inject('articleStore')
+@observer
 class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
-  state: SiderBarState = {}
+  state: SiderBarState = {
+    showAddPosterModal: false
+  }
 
   static getDerivedStateFromProps(nextProps: SiderBarProps) {
     const { location: { pathname } } = nextProps;
@@ -34,13 +42,29 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
     const { currentPathname } = this.state;
     return currentPathname.indexOf(pathname) > -1 ? 'active' : '';
   }
+  handleShowAddPosterModal = () => {
+    this.setState({
+      showAddPosterModal: true
+    })
+  }
+
+  handleHiddenAddPosterModal = () => {
+    this.setState({
+      showAddPosterModal: false
+    })
+  }
 
   render() {
-    const { currentPathname } = this.state;
+    const { currentPathname, showAddPosterModal } = this.state;
     return (
       <div className="sider-bar">
         <Link to="/user-center"><img className="avatar" /></Link>
-        <div className="add-btn"><Icon type="plus" /></div>
+        <div
+          className="add-btn"
+          onClick={this.handleShowAddPosterModal}
+        >
+          <Icon type="plus" />
+        </div>
         <div className="menu">
           <div
             className={`menu__item ${currentPathname === '/' ? 'active': '' }`}
@@ -63,6 +87,11 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
             <Link to="/setting"><Icon type="setting" /></Link>
           </div>
         </div>
+
+        <AddPosterModal
+          visible={showAddPosterModal}
+          onClose={this.handleHiddenAddPosterModal}
+        />
       </div>
     )
   }
