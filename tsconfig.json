@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
   },
   "include": [
-    "@types"
+    "@types/*",
   ],
   "exclude": [
     "node_modules"
