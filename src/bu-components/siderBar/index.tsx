@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 21:54:17
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-07 21:28:04
+ * @LastEditTime: 2020-03-08 10:55:25
  * @Description:
  */
 
@@ -42,16 +42,17 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
     const { currentPathname } = this.state;
     return currentPathname.indexOf(pathname) > -1 ? 'active' : '';
   }
-  handleShowAddPosterModal = () => {
+
+  handleToggleAddPosterModal = () => {
     this.setState({
-      showAddPosterModal: true
-    })
+      showAddPosterModal: !this.state.showAddPosterModal
+    });
   }
 
-  handleHiddenAddPosterModal = () => {
-    this.setState({
-      showAddPosterModal: false
-    })
+  handleAddPoster = (articleData) => {
+    const { articleStore } = this.props;
+    articleStore.addArticle(articleData));
+    this.handleToggleAddPosterModal();
   }
 
   render() {
@@ -61,7 +62,7 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
         <Link to="/user-center"><img className="avatar" /></Link>
         <div
           className="add-btn"
-          onClick={this.handleShowAddPosterModal}
+          onClick={this.handleToggleAddPosterModal}
         >
           <Icon type="plus" />
         </div>
@@ -90,7 +91,8 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
 
         <AddPosterModal
           visible={showAddPosterModal}
-          onClose={this.handleHiddenAddPosterModal}
+          onOk={this.handleAddPoster}
+          onClose={this.handleToggleAddPosterModal}
         />
       </div>
     )

@@ -14,13 +14,15 @@ class Tag extends React.Component<TagProps, TagState> {
   render() {
     return (
       <div className="page tag-page">
-        <aside>
-          <SearchBar>
-            <TagList />
-          </SearchBar>
-        </aside>
-        <div className="tag">
-          <TagManage />
+        <div className="page-content">
+          <aside>
+            <SearchBar>
+              <TagList />
+            </SearchBar>
+          </aside>
+          <div className="tag">
+            <TagManage />
+          </div>
         </div>
       </div>
     )
