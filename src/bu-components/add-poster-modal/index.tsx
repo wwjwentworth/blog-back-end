@@ -30,12 +30,19 @@ class AddPosterModal extends React.PureComponent<AddPosterModalProps, AddPosterM
         ...fields,
         gmtCreate: +new Date()
       }
+      this.props.form.resetFields();
       this.props.onOk(articleData);
     })
   }
 
+  // 取消
+  handleCancel = () => {
+    this.props.form.resetFields();
+    this.props.onClose();
+  }
+
   render() {
-    const { visible, onClose, form } = this.props;
+    const { visible, form } = this.props;
     const { getFieldDecorator} = form;
     return(
       <Modal
@@ -43,7 +50,7 @@ class AddPosterModal extends React.PureComponent<AddPosterModalProps, AddPosterM
         title="添加文章"
         okText="确认"
         cancelText="取消"
-        onCancel={onClose}
+        onCancel={this.handleCancel}
         onOk={this.handleSubmit}
       >
         <Form>
