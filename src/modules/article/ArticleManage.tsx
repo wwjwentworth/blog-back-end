@@ -1,9 +1,12 @@
 import React from 'react';
-import { Button } from 'antd';
+import { observer, inject } from 'mobx-react';
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
+import { Button, Modal } from 'antd';
+import dayjs from 'dayjs';
 
 import { TagEnum } from '@/domains/tag-domain/constants';
+import { TIME_FORMAT } from '@/domains/basic-domain/constants';
 
 import 'react-markdown-editor-lite/lib/index.css';
 import './index.less';
@@ -19,19 +22,20 @@ const mdEditorConfig = {
     menu: true,           // 是否显示顶部菜单栏
     md: true,             // 是否显示编辑区
     html: true,           // 是否显示预览区
-    fullScreen: true,      // 全屏功能
+    fullScreen: true,     // 全屏功能
   },
-  table: {                 // 表格默认是几行几列
+  table: {                // 表格默认是几行几列
     maxRow: 5,
     maxCol: 6,
   }
 };
 
+@inject('articleStore')
+@observer
 class ArticleManage extends React.Component<ArticleManageProps, ArticleManageState> {
 
   state: ArticleManageState = {
-    mode: 'write',
-    html: '',
+    mode: 'preview',
   }
 
   mdParser: MarkdownIt = new MarkdownIt({
@@ -52,15 +56,31 @@ class ArticleManage extends React.Component<ArticleManageProps, ArticleManageSta
     return this.mdParser.render(text);
   }
 
+  // 删除文章
+  handleDeleteArticle = () => {
+    Modal.confirm({
+      title: '是否确认删除文章',
+      content: '删除之后文章不再复原',
+      okText: '确认',
+      cancelText: '取消',
+      onOk: () => {
+        const { articleStore } = this.props;
+        articleStore.deleteArticle();
+      }
+    })
+  }
+
   render() {
-    const { mode, html } = this.state;
+    const { mode } = this.state;
+    const { currentArticle } = this.props.articleStore;
+    const { html = '', gmtCreate, title } = currentArticle;
     return (
       <div className="article-manage">
         <div className="article-manage__header">
-          <div className="title">文章标题</div>
+          <div className="title">{title}</div>
           <div className="content">
             <div className="details">
-              <div className="time">2020-03-03 19:45:33</div>
+              <div className="time">{dayjs(gmtCreate).format(TIME_FORMAT)}</div>
               <div className="tag-list">
                 {
                   TagEnum.map((tag, idx) => {
@@ -86,7 +106,10 @@ class ArticleManage extends React.Component<ArticleManageProps, ArticleManageSta
                   onClick={() => this.handleChangeMode('preview')}
                 >&#xe72a;</span>
               }
-              <span className="icon iconfont">&#xe600;</span>
+              <span
+                className="icon iconfont"
+                onClick={this.handleDeleteArticle}
+              >&#xe600;</span>
               <span className="icon iconfont">&#xe68b;</span>
             </div>
           </div>
