@@ -44,6 +44,7 @@
     "babel-polyfill": "^6.26.0",
     "css-loader": "^3.4.2",
     "eslint-plugin-jsx-control-statements": "^2.2.1",
+    "file-loader": "^5.1.0",
     "happypack": "^5.0.1",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",

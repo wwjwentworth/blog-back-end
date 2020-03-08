@@ -5,7 +5,7 @@ import MarkdownIt from 'markdown-it';
 import { Button, Modal } from 'antd';
 import dayjs from 'dayjs';
 
-import { TagEnum } from '@/domains/tag-domain/constants';
+import { TagColorNum, TagEnum } from '@/domains/tag-domain/constants';
 import { TIME_FORMAT } from '@/domains/basic-domain/constants';
 
 import 'react-markdown-editor-lite/lib/index.css';
@@ -83,12 +83,12 @@ class ArticleManage extends React.Component<ArticleManageProps, ArticleManageSta
               <div className="time">{dayjs(gmtCreate).format(TIME_FORMAT)}</div>
               <div className="tag-list">
                 {
-                  TagEnum.map((tag, idx) => {
+                  TagEnum.map((item, idx) => {
                     return (
                       <div
-                        className={`tag-item ${tag.color}`}
+                        className={`tag-item ${TagColorNum[item.tag]}`}
                         key={`tag${idx}`}
-                      >{tag.name}</div>
+                      >{item.name}</div>
                     )
                   })
                 }

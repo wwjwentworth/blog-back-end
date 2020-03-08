@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 21:54:17
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-08 10:55:25
+ * @LastEditTime: 2020-03-08 21:36:39
  * @Description:
  */
 
@@ -11,10 +11,12 @@ import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
 import { Layout, Icon } from 'antd';
 import AddPosterModal from '@/bu-components/add-poster-modal';
+import Avatar from '@/assets/image/avatar.jpeg';
 
 import './index.less';
 
 const { Sider } = Layout;
+// const Avatar = require('@/assets/image/avatar.jpeg');
 
 interface SiderBarState {
   currentPathname?: string,
@@ -59,7 +61,9 @@ class SiderBar extends React.Component<SiderBarProps, SiderBarState> {
     const { currentPathname, showAddPosterModal } = this.state;
     return (
       <div className="sider-bar">
-        <Link to="/user-center"><img className="avatar" /></Link>
+        <Link to="/user-center">
+          <img className="avatar" src={Avatar} />
+        </Link>
         <div
           className="add-btn"
           onClick={this.handleToggleAddPosterModal}

@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2019-12-09 15:55:29
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-08 15:24:34
+ * @LastEditTime: 2020-03-08 20:59:15
  * @Description: 
  */
 const path = require('path');
@@ -63,13 +63,12 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {},
-          },
-        ],
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        loader: require.resolve('url-loader'),
+        options: {
+          limit: 10000,
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
       },
     ]
   },

@@ -1,10 +1,13 @@
 import React from 'react';
-import { Modal, Form, Input } from 'antd';
+import { Modal, Form, Input, Select, Switch } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { ModalProps } from 'antd/lib/modal';
 
+import { TagEnum } from '@/domains/tag-domain/constants';
 
 const FormItem = Form.Item;
+const Option = Select.Option;
+
 const formItemLayout = {
   labelCol: {
     sm: { span: 4 },
@@ -28,11 +31,12 @@ class AddPosterModal extends React.PureComponent<AddPosterModalProps, AddPosterM
       if (err) return;
       const articleData = {
         ...fields,
-        gmtCreate: +new Date()
+        gmtCreate: +new Date(),
+        gmtModify: +new Date()
       }
       this.props.form.resetFields();
       this.props.onOk(articleData);
-    })
+    });
   }
 
   // 取消
@@ -89,6 +93,60 @@ class AddPosterModal extends React.PureComponent<AddPosterModalProps, AddPosterM
                 ]
               })(
                 <Input placeholder="请输入文章作者" />
+              )
+            }
+          </FormItem>
+          <FormItem
+            label="文章标签"
+            {...formItemLayout}
+          >
+            {
+              getFieldDecorator('tag', {
+                rules: [
+                  {
+                    required: true,
+                    message: '请输入文章标签'
+                  }
+                ]
+              })(
+                <Select
+                  placeholder="请输入文章标签"
+                >
+                  {
+                    TagEnum.map((item, idx) => {
+                      return (
+                        <Option
+                          key={`tag${idx}`}
+                          value={item.tag}
+                        >{item.name}</Option>
+                      );
+                    })
+                  }
+                </Select>
+              )
+            }
+          </FormItem>
+          <FormItem
+            label="文章封面"
+            {formItemLayout}
+          >
+            {
+              getFieldDecorator('cover')(
+                <Input
+                  placeholder="请输入文章封面链接地址"
+                />
+              )
+            }
+          </FormItem>
+          <FormItem
+            label="文章置顶"
+            {...formItemLayout}
+          >
+            {
+              getFieldDecorator('isTop', {
+                valuePropName: 'checked'
+              })(
+                <Switch />
               )
             }
           </FormItem>
