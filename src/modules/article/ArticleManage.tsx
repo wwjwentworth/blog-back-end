@@ -44,6 +44,10 @@ class ArticleManage extends React.Component<ArticleManageProps, ArticleManageSta
     typographer: true,
   });
 
+  componentDidMount() {
+    this.props.articleStore.getCurrentArticle();
+  }
+
   handleChangeMode = (mode: 'write' | 'preview') => {
     this.setState({ mode });
   }

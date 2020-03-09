@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2019-12-09 15:55:29
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-08 20:59:15
+ * @LastEditTime: 2020-03-09 22:21:03
  * @Description: 
  */
 const path = require('path');
@@ -57,8 +57,11 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              javascriptEnabled: true
-            }
+              modifyVars: {
+                'primary-color': '#708893',
+              },
+              javascriptEnabled: true,
+            },
           },
         ]
       },

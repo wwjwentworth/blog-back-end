@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-03-01 21:54:17
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-08 21:36:39
+ * @LastEditTime: 2020-03-09 22:09:34
  * @Description:
  */
 
@@ -16,7 +16,6 @@ import Avatar from '@/assets/image/avatar.jpeg';
 import './index.less';
 
 const { Sider } = Layout;
-// const Avatar = require('@/assets/image/avatar.jpeg');
 
 interface SiderBarState {
   currentPathname?: string,

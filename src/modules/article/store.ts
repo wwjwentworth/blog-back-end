@@ -2,7 +2,7 @@
  * @Author: 吴文洁
  * @Date: 2020-03-07 20:02:36
  * @LastEditors: 吴文洁
- * @LastEditTime: 2020-03-08 19:15:26
+ * @LastEditTime: 2020-03-09 22:12:35
  * @Description:
  */
 
@@ -23,22 +23,16 @@ class ArticleStore {
     //
   }
 
-  @action getCurrentArticle = () => {
+  @action getCurrentArticle = (articleId: string) => {
     //
   }
 
   @action addArticle = (article: Article) => {
-    this.currentArticle = article;
-    this.articleList.push(article)
+    // 发请求，成功之后获取当前需要展示的文章
   }
 
   @action deleteArticle = () => {
-    if (this.currentArticle.id) {
-      // 物理删除
-    } else {
-      // 逻辑删除
-      this.articleList.splice(0, 1);
-    }
+    //
   }
 }
 
