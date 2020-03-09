@@ -10,22 +10,27 @@ class User extends React.Component<UserProps, UserState> {
   render() {
     return (
       <div className="page user-center-page">
-        <section className="basic-info">
-          <div className="personal item">
-            <div className="title">Personal</div>
-            <div className="content">
-              <div className=""></div>
-            </div>
+        <div className="personal item">
+          <div className="title">
+            <span>Personal</span>
+            <span className="icon iconfont">&#xe6a8;</span>
           </div>
-          <div className="address item">
-            <div className="title">Address</div>
-            <div className="content"></div>
+          <div className="content">
+            <img className="avatar" />
+            <section>
+              <div className="name">吴文洁</div>
+              <div className="motto">这里是我的座右铭</div>
+            </section>
           </div>
-          <div className="social-account item">
-            <div className="title">Social Account</div>
-            <div className="content"></div>
-          </div>
-        </section>
+        </div>
+        <div className="address item">
+          <div className="title">Address</div>
+          <div className="content"></div>
+        </div>
+        <div className="social-account item">
+          <div className="title">Social Account</div>
+          <div className="content"></div>
+        </div>
       </div>
     )
   }
