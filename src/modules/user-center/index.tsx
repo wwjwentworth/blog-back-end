@@ -1,19 +1,34 @@
 import React from 'react';
+import EditBasicInfoModal from './component/EditBasicInfoModal';
 
 import './index.less';
 
 interface UserProps {};
-interface UserState {};
+interface UserState {
+  showEditBasicInfoModal: boolean
+};
 
 class User extends React.Component<UserProps, UserState> {
+  state: UserState = {
+    showEditBasicInfoModal: false
+  }
+  handleShowBasicInfoModal = () => {
+    this.setState({
+      showEditBasicInfoModal: true
+    })
+  }
 
   render() {
+    const { showEditBasicInfoModal } = this.state;
     return (
       <div className="page user-center-page">
         <div className="personal item">
           <div className="title">
             <span>Personal</span>
-            <span className="icon iconfont">&#xe6a8;</span>
+            <span
+              className="icon iconfont"
+              onClick={this.handleShowBasicInfoModal}
+            >&#xe6a8;</span>
           </div>
           <div className="content">
             <img className="avatar" />
@@ -31,6 +46,10 @@ class User extends React.Component<UserProps, UserState> {
           <div className="title">Social Account</div>
           <div className="content"></div>
         </div>
+
+        <EditBasicInfoModal
+          visible={showEditBasicInfoModal}
+        />
       </div>
     )
   }
